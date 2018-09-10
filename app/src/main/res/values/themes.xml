@@ -1,0 +1,10 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <style name="ThemeLight" parent="Theme.AppCompat.Light.NoActionBar">
+    	<item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryDark">@color/color_primary_dark</item>
+        <item name="colorAccent">@color/color_accent</item>
+        <item name="colorButtonNormal">@color/color_accent</item>
+        <item name="toolbar_style">@style/toolbar_light</item>
+        <item name="edit_text_style">@style/edit_text_light</item>
+    </style>
+</resources>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="@android:style/Theme.Holo.Light">
+	</style>
+	<style name="toolbar_light" parent="Widget.AppCompat.Toolbar">
+		<item name="android:background">@color/color_primary</item>
+		<item name="theme">@style/Toolbar.Light</item>
+		<item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+	</style>
+	
+	<style name="edit_text_light">
+		<item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
+		<item name="android:padding">5.dp</item>
+		<item name="android:textColor">@android:color/black</item>
+		<item name="android:singleLine">true</item>
+		<item name="android:background">@drawable/bg_edit_text</item>
+	</style>
+	
+	
+	<style name="Toolbar.Light" parent="ThemeOverlay.AppCompat.Light">
+		<item name="android:textColorPrimary">#ffffff</item>
+		<item name="android:textColorSecondary">#ffffff</item>
+		<item name="android:textColorPrimaryInverse">#ffffff</item>
+		<item name="actionMenuTextColor">#ffffff</item>
+	</style>
+</resources>

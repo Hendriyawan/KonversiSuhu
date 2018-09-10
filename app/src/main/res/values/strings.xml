@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Konversi Suhu</string>
+    <string name="button_count">HITUNG</string>
+    <string name="formula">RUMUS :</string>
+    <string name="message_temp_1_isempty">Masukan nilai suhu yang ingin di konversi</string>
+    <string name="about">Tentang</string>
+    <string name="banner_konversi_suhu">ca-app-pub-3050382572008504/8562431595</string>
+</resources>

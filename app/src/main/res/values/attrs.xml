@@ -1,0 +1,4 @@
+<resources>
+	<attr name="toolbar_style" format="reference"></attr>
+	<attr name="edit_text_style" format="reference"></attr>
+</resources>
