@@ -13,7 +13,7 @@ public class SharedPrefsTemp
 		editor = pref.edit();
 		editor.putString("temp_symbol_1", temperature);
 		editor.putInt("temp_index_1", index);
-		editor.commit();
+		editor.apply();
 	}
 	
 	public static void setTemperature2(Context context, String temperature, int index)
@@ -22,7 +22,7 @@ public class SharedPrefsTemp
 		editor = pref.edit();
 		editor.putString("temp_symbol_2", temperature);
 		editor.putInt("temp_index_2", index);
-		editor.commit();
+		editor.apply();
 	}
 	//get temperature symbol (C, R, F, K) 1
 	public static String getTempSymbol1(Context context)

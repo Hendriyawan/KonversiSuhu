@@ -1,4 +1,5 @@
 package com.gdev.temperature.conversion.app;
+import android.annotation.SuppressLint;
 import android.content.*;
 import android.os.*;
 import android.support.v7.app.*;
@@ -7,9 +8,10 @@ import android.view.*;
 import android.view.animation.*;
 import android.widget.*;
 import com.gdev.temperature.conversion.*;
-import com.google.android.gms.ads.*;
 
 import android.support.v7.widget.Toolbar;
+
+import java.util.Objects;
 
 /* Temperatures.java (Konversi Suhu)
 * 29 / 11 / 2017 created by Hendriyawan
@@ -23,17 +25,10 @@ import android.support.v7.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity
 {
-	//ADMOB
-	private AdRequest mAdRequest;
-	private AdView mAdView;
-	
-	private AppCompatButton btn_count;
-	private AppCompatEditText edit_temp1;
+
+    private AppCompatEditText edit_temp1;
 	private AppCompatEditText edit_temp2;
-	private AppCompatSpinner sp_temp1;
-	private AppCompatSpinner sp_temp2;
-	private Toolbar toolbar;
-	private Temperatures temperature;
+    private Temperatures temperature;
 	private LinearLayout layout_formula;
 	private TextView text_formula;
 	private Animation rotate_zoom_out;
@@ -49,31 +44,24 @@ public class MainActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        
-        //ADMOB
-        
-        MobileAds.initialize(this, "ca-app-pub-3050382572008504~6961575316");
-        
-        mAdRequest = new AdRequest.Builder().build();
-        mAdView = (AdView)findViewById(R.id.adview_banner);
-        mAdView.loadAd(mAdRequest);
+
         
         //temperature
         temperature = new Temperatures(this);
         
-        layout_formula = (LinearLayout)findViewById(R.id.layout_formula);
-        text_formula = (TextView)findViewById(R.id.text_formula);
+        layout_formula = findViewById(R.id.layout_formula);
+        text_formula = findViewById(R.id.text_formula);
         //animation
         rotate_zoom_out = AnimationUtils.loadAnimation(MainActivity.this, R.anim.rotate_zoom_out);
         
         //toolbar
-        setupToolbar(R.id.toolbar);
+        setupToolbar();
          //edit text temp to conversion 1
-        edit_temp1 = (AppCompatEditText)findViewById(R.id.edit_1_temperature_to_conversion);
+        edit_temp1 = findViewById(R.id.edit_1_temperature_to_conversion);
         edit_temp1.setHint(SharedPrefsTemp.getTempSymbol1(MainActivity.this));
         
          //edit text temp to conversion 2
-        edit_temp2 = (AppCompatEditText)findViewById(R.id.edit_2_temperature_to_conversion);
+        edit_temp2 = findViewById(R.id.edit_2_temperature_to_conversion);
         edit_temp2.setHint(SharedPrefsTemp.getTempSymbol2(MainActivity.this));
         edit_temp2.setKeyListener(null);
         edit_temp2.setClickable(false);
@@ -81,7 +69,7 @@ public class MainActivity extends AppCompatActivity
         //Spinner & Adapter 1
         ArrayAdapter<String> adapter1 = new ArrayAdapter(MainActivity.this, android.R.layout.simple_spinner_item, temperatures);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sp_temp1 = (AppCompatSpinner)findViewById(R.id.spinner_1_temperature_to_conversion);
+        AppCompatSpinner sp_temp1 = findViewById(R.id.spinner_1_temperature_to_conversion);
         sp_temp1.setAdapter(adapter1);
         
         //set selection
@@ -103,7 +91,7 @@ public class MainActivity extends AppCompatActivity
         //spinner & adapter 2
         ArrayAdapter<String> adapter2 = new ArrayAdapter(MainActivity.this, android.R.layout.simple_spinner_item, temperatures);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sp_temp2 = (AppCompatSpinner)findViewById(R.id.spinner_2_temperature_to_conversion);
+        AppCompatSpinner sp_temp2 = (AppCompatSpinner) findViewById(R.id.spinner_2_temperature_to_conversion);
         sp_temp2.setAdapter(adapter2);
         sp_temp2.setSelection(SharedPrefsTemp.getTempIndex2(MainActivity.this));
         sp_temp2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -122,12 +110,13 @@ public class MainActivity extends AppCompatActivity
         });
         
         //Button Count
-        btn_count = (AppCompatButton)findViewById(R.id.count);
+        AppCompatButton btn_count = findViewById(R.id.count);
         btn_count.setOnClickListener(new View.OnClickListener(){
-        	@Override
+        	@SuppressLint("SetTextI18n")
+            @Override
             public void onClick(View v)
             {
-            	if(edit_temp1.getText().toString().isEmpty())
+            	if(Objects.requireNonNull(edit_temp1.getText()).toString().isEmpty())
                 {
                 	showToast(getResources().getString(R.string.message_temp_1_isempty));
                 }
@@ -140,8 +129,7 @@ public class MainActivity extends AppCompatActivity
                     String symbol_temp1 = SharedPrefsTemp.getTempSymbol1(MainActivity.this);
                     String symbol_temp2 = SharedPrefsTemp.getTempSymbol2(MainActivity.this);
                     double value_to_conversion = Double.parseDouble(edit_temp1.getText().toString());
-                    
-                    /**start Celcius to (R, F, K)**/
+
                     // C to R
                     if (symbol_temp1.equals("\u00B0C") && symbol_temp2.equals("\u00B0R"))
                     {
@@ -249,16 +237,16 @@ public class MainActivity extends AppCompatActivity
     }
     
     /* setup android toolbar*/
-    private void setupToolbar(int id)
+    private void setupToolbar()
     {
-    	toolbar = (Toolbar)findViewById(id);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(R.string.app_name);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.app_name);
     }
     /* show toast*/
     public void showToast(String message)
     {
-    	Toast.makeText(MainActivity.this, message, 5000).show();
+    	Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
     }
     
 }
